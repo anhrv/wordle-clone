@@ -3,14 +3,48 @@ import { useState } from "react";
 const useWordle = (solution) => {
   const [turn, setTurn] = useState(0);
   const [currentGuess, setCurrentGuess] = useState("");
-  const [guesses, setGuesses] = useState([]);
+  const [guesses, setGuesses] = useState([...Array(6)]);
   const [history, setHistory] = useState([]);
   const [isCorrect, setIsCorrect] = useState(false);
 
   const formatGuesses = () => {
-    console.log("formating - ", currentGuess);
+    let solutionArray = [...solution];
+    let formattedGuess = [...currentGuess].map((letter) => {
+      return { key: letter, color: "grey" };
+    });
+
+    formattedGuess.forEach((letter, i) => {
+      if (solutionArray[i] === letter.key) {
+        formattedGuess[i].color = "green";
+        solutionArray[i] = null;
+      }
+    });
+
+    formattedGuess.forEach((letter, i) => {
+      if (solutionArray.includes(letter.key) && letter.color !== "green") {
+        formattedGuess[i].color = "yellow";
+        solutionArray[solutionArray.indexOf(letter.key)] = null;
+      }
+    });
+    return formattedGuess;
   };
-  const addNewGuess = () => {};
+  const addNewGuess = (format) => {
+    if (currentGuess === solution) {
+      setIsCorrect(true);
+    }
+    setGuesses((prevGuesses) => {
+      let newGuesses = [...prevGuesses];
+      newGuesses[turn] = format;
+      return newGuesses;
+    });
+    setHistory((prevHistory) => {
+      return [...prevHistory, currentGuess];
+    });
+    setTurn((prevTurn) => {
+      return prevTurn + 1;
+    });
+    setCurrentGuess("");
+  };
   const handleKeyUp = ({ key }) => {
     if (key === "Backspace") {
       setCurrentGuess((prev) => {
@@ -35,7 +69,8 @@ const useWordle = (solution) => {
         console.log("word must be 5 chars long");
         return;
       }
-      formatGuesses();
+      const format = formatGuesses();
+      addNewGuess(format);
     }
   };
 
