@@ -79,10 +79,6 @@ const useWordle = (solution) => {
         });
       }
     } else if (key === "Enter") {
-      if (turn > 5) {
-        console.log("used all guesses");
-        return;
-      }
       if (history.includes(currentGuess)) {
         console.log("tried that word");
         return;

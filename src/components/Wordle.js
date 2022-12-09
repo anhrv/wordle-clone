@@ -7,10 +7,18 @@ const Wordle = () => {
 
   useEffect(() => {
     fetch("https://api.datamuse.com/words?sp=?????")
-      .then((res) => res.json())
-      .then((words) => {
-        const randomWord = words[Math.floor(Math.random() * words.length)].word;
-        setSolution(randomWord);
+      .then((res) => {
+        if (res.status !== 200) {
+          alert("Server is reporting an error.");
+        }
+        res.json().then((words) => {
+          const randomWord =
+            words[Math.floor(Math.random() * words.length)].word;
+          setSolution(randomWord);
+        });
+      })
+      .catch((error) => {
+        alert(error);
       });
   }, []);
 

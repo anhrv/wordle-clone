@@ -1,5 +1,6 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import useWordle from "../hooks/useWordle";
+import EndMess from "./EndMess";
 import Grid from "./Grid";
 import Keypad from "./Keypad";
 
@@ -7,14 +8,24 @@ const WordleBody = ({ solution }) => {
   const { currentGuess, handleKeyUp, guesses, isCorrect, turn, usedKeys } =
     useWordle(solution);
 
-  useEffect(() => {
-    window.addEventListener("keyup", handleKeyUp);
-    return () => window.removeEventListener("keyup", handleKeyUp);
-  }, [handleKeyUp]);
+  const [end, setEnd] = useState(false);
 
   useEffect(() => {
-    console.log(guesses, turn, isCorrect);
-  }, [guesses, turn, isCorrect]);
+    window.addEventListener("keyup", handleKeyUp);
+    if (isCorrect) {
+      setTimeout(() => {
+        setEnd(true);
+      }, 2000);
+      window.removeEventListener("keyup", handleKeyUp);
+    }
+    if (turn > 5) {
+      setTimeout(() => {
+        setEnd(true);
+      }, 2000);
+      window.removeEventListener("keyup", handleKeyUp);
+    }
+    return () => window.removeEventListener("keyup", handleKeyUp);
+  }, [handleKeyUp, isCorrect, turn]);
 
   return (
     <div>
@@ -28,6 +39,7 @@ const WordleBody = ({ solution }) => {
         usedKeys={usedKeys}
       />
       <Keypad usedKeys={usedKeys} />
+      {end && <EndMess isCorrect={isCorrect} solution={solution} />}
     </div>
   );
 };
