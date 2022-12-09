@@ -30,22 +30,112 @@ h1{
   text-transform: uppercase;
   font-weight: bold;
   font-size: 2.5em;
+  color:#333;
 }
 
 .row > div.green {
-  background: #39af39;
-  border-color: #39af39;
-  color:white;
+  --background: #39af39;
+  --border-color: #39af39;
+  animation: flip 0.5s ease forwards;
 }
 
 .row>div.yellow {
-  background: #beba38;
-  border-color: #beba38;
-  color: white;
+  --background: #beba38;
+  --border-color: #beba38;
+  animation: flip 0.5s ease forwards;
 }
 
 .row>div.grey {
+  --background: #898989;
+  --border-color: #898989;
+  animation: flip 0.5s ease forwards;
+}
+
+.row>div:nth-child(2){
+  animation-delay: 0.1s;
+}
+.row>div:nth-child(3) {
+  animation-delay: 0.2s;
+}
+.row>div:nth-child(4) {
+  animation-delay: 0.3s;
+}
+.row>div:nth-child(5) {
+  animation-delay: 0.4s;
+}
+
+.row.current > div.filled{
+  animation: bounce 0.2s ease-in-out forwards;
+}
+
+.keypad{
+  max-width: 500px;
+  margin:20px auto;
+}
+
+.keypad>div {
+  margin: 5px;
+  width: 40px;
+  height: 50px;
+  background: rgb(216, 214, 214);
+  display: inline-block;
+  border-radius: 6px;
+  line-height: 50px;
+}
+
+.keypad>div.green {
+  background: #39af39;
+  color: #fff;
+  transition: all 0.3s ease-in;
+}
+
+.keypad>div.yellow {
+  background: #beba38;
+  color: #fff;
+  transition: all 0.3s ease-in;
+}
+
+.keypad>div.grey {
   background: #898989;
-  border-color: #898989;
-  color: white;
+  color: #fff;
+  transition: all 0.3s ease-in;
+}
+
+@keyframes flip{
+  0%{
+    transform:rotateX(0);
+    background-color: #ffffff;
+    border-color:#333;
+  }
+  45%{
+    transform: rotateX(90deg);
+    background-color: #ffffff;
+    border-color: #333;
+  }
+  55%{
+    transform: rotateX(90deg);
+    background-color: var(--background);
+    border-color: var(--border-color);
+    color: white;
+  }
+  100%{
+    transform: rotateX(0);
+    background-color: var(--background);
+    border-color: var(--border-color);
+    color: white;
+  }
+}
+
+@keyframes bounce {
+  0%{
+    transform:scale(1);
+    border-color: #bbb;
+  }
+  50%{
+    transform:scale(1.2);
+  }
+  100%{
+    transform: scale(1);
+    border-color:#333;
+  }
 }
