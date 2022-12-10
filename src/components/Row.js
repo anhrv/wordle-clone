@@ -1,4 +1,4 @@
-const Row = ({ guess, currentGuess }) => {
+const Row = ({ guess, currentGuess, checked }) => {
   if (guess) {
     return (
       <div className="row past">

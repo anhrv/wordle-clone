@@ -46,8 +46,8 @@ h1{
 }
 
 .row>div.grey {
-  --background: #898989;
-  --border-color: #898989;
+  --background: #717171;
+  --border-color: #717171;
   animation: flip 0.5s ease forwards;
 }
 
@@ -103,7 +103,7 @@ h1{
 }
 
 .keypad>div.grey {
-  background: #898989;
+  background: #717171;
   color: #fff;
   transition: all 0.3s ease-in;
 }
@@ -139,7 +139,7 @@ h1{
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
   color:white;
   font-weight: bold;
-  position: absolute;
+  position: fixed;
   top:20px;
   left:0;
   right:0;
@@ -147,6 +147,111 @@ h1{
   width: fit-content;
   padding:20px;
   border-radius: 6px;
+}
+
+.toggle input {
+  display: none;
+}
+
+.toggle label {
+  background-color: #fff;
+  border: 1px solid #bbb;
+  border-radius: 40px;
+  cursor: pointer;
+  display: inline-block;
+  position: absolute;
+  transition: all ease-in-out 0.3s;
+  width: 40px;
+  height: 20px;
+  right:25px;
+  top:20px;
+}
+
+.toggle label::after {
+  background-color: #666;
+  border-radius: 50%;
+  content: ' ';
+  cursor: pointer;
+  display: inline-block;
+  position: absolute;
+  left: 1px;
+  top: 1px;
+  bottom:1px;
+  transition: all ease-in-out 0.3s;
+  width: 20px;
+  height: 18px;
+}
+
+.toggle input:checked~label {
+  background-color: #6b6b6d;
+  border-color: #2c2c2d;
+}
+
+.toggle input:checked~label::after {
+  background-color: #2c2c2d;
+  transform: translateX(18px);
+}
+
+.toggle span{
+  display:inline-block;
+  position: absolute;
+  top:20px;
+  right:75px;
+  font-weight: bold;
+  font-size: large;
+}
+
+body.dark{
+  background: #2b2b2c;
+  color:white;
+}
+
+body.dark h1{
+  color:white;
+  border-color:gray;
+}
+
+body.dark .keypad div {
+  color: white;
+  background-color: #6b6b6d;
+}
+
+body.dark .message{
+  background-color: whitesmoke;
+  color:#333;
+}
+body.dark .endmess{
+  background: rgba(0, 0, 0, 0.5);
+}
+
+body.dark .endmess div{
+  background-color:#333;
+}
+
+body.dark .endmess div h1{
+color:white;
+}
+
+body.dark .row.current>div.filled {
+  animation: darkbounce 0.2s ease-in-out forwards;
+}
+
+body.dark .row>div.green {
+  --background: #39af39;
+  --border-color: #39af39;
+  animation: darkflip 0.5s ease forwards;
+}
+
+body.dark .row>div.yellow {
+  --background: #beba38;
+  --border-color: #beba38;
+  animation: darkflip 0.5s ease forwards;
+}
+
+body.dark .row>div.grey {
+  --background: #717171;
+  --border-color: #717171;
+  animation: darkflip 0.5s ease forwards;
 }
 
 @keyframes flip{
@@ -174,6 +279,34 @@ h1{
   }
 }
 
+@keyframes darkflip {
+  0% {
+    transform: rotateX(0);
+    background-color: #2b2b2c;
+    border-color: #bbb;
+  }
+
+  45% {
+    transform: rotateX(90deg);
+    background-color: #2b2b2c;
+    border-color: #bbb;
+  }
+
+  55% {
+    transform: rotateX(90deg);
+    background-color: var(--background);
+    border-color: var(--border-color);
+    color: white;
+  }
+
+  100% {
+    transform: rotateX(0);
+    background-color: var(--background);
+    border-color: var(--border-color);
+    color: white;
+  }
+}
+
 @keyframes bounce {
   0%{
     transform:scale(1);
@@ -185,5 +318,22 @@ h1{
   100%{
     transform: scale(1);
     border-color:#333;
+  }
+}
+
+@keyframes darkbounce {
+  0% {
+    transform: scale(1);
+    border-color: #bbb;
+  }
+
+  50% {
+    transform: scale(1.2);
+  }
+
+  100% {
+    transform: scale(1);
+    border-color: #bbb;
+    color:#bbb
   }
 }

@@ -85,7 +85,6 @@ const useWordle = (solution) => {
         setTimeout(() => {
           setMessage(null);
         }, 2000);
-        console.log("tried that word");
         return;
       }
       if (currentGuess.length !== 5) {
@@ -93,7 +92,6 @@ const useWordle = (solution) => {
         setTimeout(() => {
           setMessage(null);
         }, 2000);
-        console.log("word must be 5 chars long");
         return;
       }
       const format = formatGuesses();
