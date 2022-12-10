@@ -1,4 +1,4 @@
-const Keypad = ({ usedKeys }) => {
+const Keypad = ({ usedKeys, currentGuess, setCurrentGuess }) => {
   const letters = [
     { key: "a" },
     { key: "b" },
@@ -27,12 +27,25 @@ const Keypad = ({ usedKeys }) => {
     { key: "y" },
     { key: "z" },
   ];
+
+  const handleClick = (key) => {
+    if (currentGuess.length < 5) {
+      setCurrentGuess((prev) => {
+        return prev + key;
+      });
+    }
+  };
+
   return (
     <div className="keypad">
       {letters.map((letter, i) => {
         const color = usedKeys[letter.key];
         return (
-          <div key={i} className={color}>
+          <div
+            onClick={() => handleClick(letter.key)}
+            key={i}
+            className={color}
+          >
             {letter.key}
           </div>
         );

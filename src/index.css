@@ -86,6 +86,10 @@ h1{
   color:#333;
 }
 
+.keypad>div:hover{
+  cursor:pointer;
+}
+
 .keypad>div.green {
   background: #39af39;
   color: #fff;

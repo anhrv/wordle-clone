@@ -5,8 +5,15 @@ import Grid from "./Grid";
 import Keypad from "./Keypad";
 
 const WordleBody = ({ solution }) => {
-  const { currentGuess, handleKeyUp, guesses, isCorrect, turn, usedKeys } =
-    useWordle(solution);
+  const {
+    currentGuess,
+    setCurrentGuess,
+    handleKeyUp,
+    guesses,
+    isCorrect,
+    turn,
+    usedKeys,
+  } = useWordle(solution);
 
   const [end, setEnd] = useState(false);
 
@@ -38,7 +45,11 @@ const WordleBody = ({ solution }) => {
         turn={turn}
         usedKeys={usedKeys}
       />
-      <Keypad usedKeys={usedKeys} />
+      <Keypad
+        usedKeys={usedKeys}
+        currentGuess={currentGuess}
+        setCurrentGuess={setCurrentGuess}
+      />
       {end && <EndMess isCorrect={isCorrect} solution={solution} />}
     </div>
   );
