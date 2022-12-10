@@ -21,7 +21,6 @@ const Wordle = () => {
         alert(error);
       });
   }, []);
-
   return (
     <div>
       <Title />

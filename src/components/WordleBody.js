@@ -42,9 +42,6 @@ const WordleBody = ({ solution }) => {
 
   return (
     <div>
-      solution-{solution}
-      <br />
-      guess-{currentGuess}
       <Grid
         currentGuess={currentGuess}
         guesses={guesses}

@@ -232,6 +232,10 @@ body.dark .endmess div h1{
 color:white;
 }
 
+body.dark .row.current>div.filled {
+  animation: darkbounce 0.2s ease-in-out forwards;
+}
+
 body.dark .row>div.green {
   --background: #39af39;
   --border-color: #39af39;
