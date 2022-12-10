@@ -7,6 +7,7 @@ const useWordle = (solution) => {
   const [history, setHistory] = useState([]);
   const [isCorrect, setIsCorrect] = useState(false);
   const [usedKeys, setUsedKeys] = useState([]);
+  const [message, setMessage] = useState(null);
 
   const formatGuesses = () => {
     let solutionArray = [...solution];
@@ -80,10 +81,18 @@ const useWordle = (solution) => {
       }
     } else if (key === "Enter") {
       if (history.includes(currentGuess)) {
+        setMessage("Already tried");
+        setTimeout(() => {
+          setMessage(null);
+        }, 2000);
         console.log("tried that word");
         return;
       }
       if (currentGuess.length !== 5) {
+        setMessage("Not enough letters");
+        setTimeout(() => {
+          setMessage(null);
+        }, 2000);
         console.log("word must be 5 chars long");
         return;
       }
@@ -100,6 +109,7 @@ const useWordle = (solution) => {
     isCorrect,
     usedKeys,
     handleKeyUp,
+    message,
   };
 };
 

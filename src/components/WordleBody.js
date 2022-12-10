@@ -3,6 +3,7 @@ import useWordle from "../hooks/useWordle";
 import EndMess from "./EndMess";
 import Grid from "./Grid";
 import Keypad from "./Keypad";
+import Message from "./Message";
 
 const WordleBody = ({ solution }) => {
   const {
@@ -13,6 +14,7 @@ const WordleBody = ({ solution }) => {
     isCorrect,
     turn,
     usedKeys,
+    message,
   } = useWordle(solution);
 
   const [end, setEnd] = useState(false);
@@ -51,6 +53,7 @@ const WordleBody = ({ solution }) => {
         setCurrentGuess={setCurrentGuess}
       />
       {end && <EndMess isCorrect={isCorrect} solution={solution} />}
+      {message && <Message message={message} />}
     </div>
   );
 };
