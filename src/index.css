@@ -232,10 +232,6 @@ body.dark .endmess div h1{
 color:white;
 }
 
-body.dark .row.current>div.filled {
-  animation: darkbounce 0.2s ease-in-out forwards;
-}
-
 body.dark .row>div.green {
   --background: #39af39;
   --border-color: #39af39;
@@ -252,6 +248,32 @@ body.dark .row>div.grey {
   --background: #717171;
   --border-color: #717171;
   animation: darkflip 0.5s ease forwards;
+}
+
+body.dark .row>div:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+body.dark .row>div:nth-child(3) {
+  animation-delay: 0.2s;
+}
+
+body.dark .row>div:nth-child(4) {
+  animation-delay: 0.3s;
+}
+
+body.dark .row>div:nth-child(5) {
+  animation-delay: 0.4s;
+}
+
+.keypad .enter{
+  width: fit-content;
+  padding:5px;
+}
+
+.keypad .backspace{
+  padding: 5px;
+  width: fit-content;
 }
 
 @keyframes flip{

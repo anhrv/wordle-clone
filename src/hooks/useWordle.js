@@ -108,6 +108,10 @@ const useWordle = (solution) => {
     usedKeys,
     handleKeyUp,
     message,
+    history,
+    setMessage,
+    formatGuesses,
+    addNewGuess,
   };
 };
 

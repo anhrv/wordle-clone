@@ -1,4 +1,12 @@
-const Keypad = ({ usedKeys, currentGuess, setCurrentGuess }) => {
+const Keypad = ({
+  usedKeys,
+  currentGuess,
+  setCurrentGuess,
+  history,
+  setMessage,
+  formatGuesses,
+  addNewGuess,
+}) => {
   const letters = [
     { key: "a" },
     { key: "b" },
@@ -26,13 +34,38 @@ const Keypad = ({ usedKeys, currentGuess, setCurrentGuess }) => {
     { key: "x" },
     { key: "y" },
     { key: "z" },
+    { key: "Enter" },
+    { key: "Backspace" },
   ];
 
   const handleClick = (key) => {
-    if (currentGuess.length < 5) {
+    if (key === "Enter") {
+      if (history.includes(currentGuess)) {
+        setMessage("Already tried");
+        setTimeout(() => {
+          setMessage(null);
+        }, 2000);
+        return;
+      }
+      if (currentGuess.length !== 5) {
+        setMessage("Not enough letters");
+        setTimeout(() => {
+          setMessage(null);
+        }, 2000);
+        return;
+      }
+      const format = formatGuesses();
+      addNewGuess(format);
+    } else if (key === "Backspace") {
       setCurrentGuess((prev) => {
-        return prev + key;
+        return prev.slice(0, -1);
       });
+    } else {
+      if (currentGuess.length < 5) {
+        setCurrentGuess((prev) => {
+          return prev + key;
+        });
+      }
     }
   };
 
@@ -40,6 +73,28 @@ const Keypad = ({ usedKeys, currentGuess, setCurrentGuess }) => {
     <div className="keypad">
       {letters.map((letter, i) => {
         const color = usedKeys[letter.key];
+        if (letter.key === "Enter") {
+          return (
+            <div
+              onClick={() => handleClick(letter.key)}
+              key={i}
+              className="enter"
+            >
+              {letter.key}
+            </div>
+          );
+        } else if (letter.key === "Backspace") {
+          return (
+            <div
+              onClick={() => handleClick(letter.key)}
+              key={i}
+              className="backspace"
+            >
+              DELETE
+            </div>
+          );
+        }
+
         return (
           <div
             onClick={() => handleClick(letter.key)}

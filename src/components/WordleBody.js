@@ -15,6 +15,10 @@ const WordleBody = ({ solution }) => {
     turn,
     usedKeys,
     message,
+    setMessage,
+    history,
+    formatGuesses,
+    addNewGuess,
   } = useWordle(solution);
 
   const [end, setEnd] = useState(false);
@@ -51,6 +55,10 @@ const WordleBody = ({ solution }) => {
         usedKeys={usedKeys}
         currentGuess={currentGuess}
         setCurrentGuess={setCurrentGuess}
+        history={history}
+        setMessage={setMessage}
+        formatGuesses={formatGuesses}
+        addNewGuess={addNewGuess}
       />
       {end && <EndMess isCorrect={isCorrect} solution={solution} />}
       {message && <Message message={message} />}
